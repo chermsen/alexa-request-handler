@@ -7,7 +7,7 @@ use Ch3rm\Alexa\Exceptions\SignatureException;
 use Ch3rm\Alexa\Exceptions\NetworkException;
 use Exception;
 
-class Validator
+class AlexaValidator
 {
     /**
      * @var int

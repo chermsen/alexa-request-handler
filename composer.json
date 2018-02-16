@@ -1,6 +1,6 @@
 {
     "name": "ch3rm/alexa-request-handler",
-    "description": "Tools for validating and processing requests from Amazon Alexa devices",
+    "description": "A package for validating and processing requests from Amazon Alexa devices",
     "license": "Apache-2.0",
     "type": "library",
     "authors": [
@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.0",
+        "ext-openssl": "*"
     },
     "autoload": {
         "psr-4": {

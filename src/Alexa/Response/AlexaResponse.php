@@ -2,13 +2,28 @@
 
 namespace Ch3rm\Alexa\Response;
 
-class Response
+/**
+ * Class AlexaResponse
+ *
+ * The response class provides a valid and consistent Alexa Response object at any time
+ *
+ * @package Ch3rm\Alexa\Response
+ */
+class AlexaResponse
 {
+    /**
+     * @var array
+     */
     private $response;
+
+    /**
+     * @var string
+     */
     private $version = '1.0';
 
-    const EOL = "\r\n";
-
+    /**
+     * AlexaResponse constructor
+     */
     public function __construct()
     {
         $this->response = [
@@ -17,6 +32,11 @@ class Response
         ];
     }
 
+    /**
+     * @param string $text
+     * @param bool $ssml
+     * @return $this
+     */
     public function withOutputSpeech(string $text, bool $ssml = false)
     {
         if($ssml){
@@ -35,6 +55,11 @@ class Response
         return $this;
     }
 
+    /**
+     * @param $title
+     * @param $content
+     * @return $this
+     */
     public function withSimpleCard($title, $content)
     {
         $this->response['response']['card'] = [
@@ -46,6 +71,12 @@ class Response
         return $this;
     }
 
+    /**
+     * @param $title
+     * @param $content
+     * @param array $image
+     * @return $this
+     */
     public function withStandardCard($title, $content, array $image = [])
     {
         $this->response['response']['card'] = [
@@ -66,6 +97,11 @@ class Response
         return $this;
     }
 
+    /**
+     * @param string $text
+     * @param bool $ssml
+     * @return $this
+     */
     public function withReprompt(string $text, bool $ssml = false)
     {
         if($ssml){
@@ -84,12 +120,20 @@ class Response
         return $this;
     }
 
+    /**
+     * @param array $directives
+     * @return $this
+     */
     public function withDirectives(array $directives)
     {
         $this->response['response']['directives'] = $directives;
         return $this;
     }
 
+    /**
+     * @param bool $var
+     * @return $this
+     */
     public function withShouldEndSession(bool $var = true)
     {
         $this->response['response']['shouldEndSession'] = $var;
@@ -97,9 +141,27 @@ class Response
         return $this;
     }
 
-    public function renderResponse()
+    /**
+     * @param string $version
+     * @return $this
+     */
+    public function setVersion(string $version)
     {
-        header('Content-Type: application/json;charset=utf-8');
-        echo json_encode($this->response);
+        $this->version = $version;
+        return $this;
+    }
+
+    /**
+     * @param bool $json
+     * @return array|mixed
+     */
+    public function getResponse(bool $json = true)
+    {
+        if(!$json){
+            return $this->response;
+        }
+
+        return json_decode($this->response);
+
     }
 }

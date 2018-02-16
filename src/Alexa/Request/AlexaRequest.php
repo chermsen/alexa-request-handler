@@ -7,21 +7,79 @@ use Ch3rm\Alexa\Request\Type\LaunchRequest;
 use Ch3rm\Alexa\Request\Type\IntentRequest;
 use Ch3rm\Alexa\Request\Type\SessionEndedRequest;
 
-class Request
+/**
+ * Class AlexaRequest
+ *
+ * @package Ch3rm\Alexa\Request
+ */
+class AlexaRequest
 {
+    /**
+     * @var array
+     */
     private $request;
+
+    /**
+     * @var string
+     */
     private $version;
+
+    /**
+     * @var bool
+     */
     private $sessionState;
+
+    /**
+     * @var string
+     */
     private $sessionId;
+
+    /**
+     * @var string
+     */
     private $appId;
+
+    /**
+     * @var string
+     */
     private $userId;
+
+    /**
+     * @var
+     */
     private $deviceId;
+
+    /**
+     * @var array
+     */
     private $supportedInterfaces;
+
+    /**
+     * @var string
+     */
     private $apiEndpoint;
+
+    /**
+     * @var
+     */
     private $apiToken;
+
+    /**
+     * @var object
+     */
     private $requestObject;
+
+    /**
+     * @var string
+     */
     private $requestType;
 
+    /**
+     * AlexaRequest constructor
+     *
+     * @param string $request
+     * @throws RequestException
+     */
     public function __construct(string $request)
     {
         if(!$request = json_decode($request, true)){
@@ -51,21 +109,33 @@ class Request
 
     }
 
+    /**
+     * @return string
+     */
     public function getRequestType()
     {
         return $this->requestType;
     }
 
+    /**
+     * @return string
+     */
     public function getVersion()
     {
         return $this->version;
     }
 
+    /**
+     * @return bool
+     */
     public function getSessionState()
     {
         return $this->sessionState;
     }
 
+    /**
+     * @return bool
+     */
     public function sessionIsNew()
     {
         if($this->sessionState == 1){
@@ -75,31 +145,50 @@ class Request
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function getSessionId()
     {
         return $this->sessionId;
     }
 
+    /**
+     * @return string
+     */
     public function getApplicationId()
     {
         return $this->appId;
     }
 
+    /**
+     * @return string
+     */
     public function getUserId()
     {
         return $this->userId;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDeviceId()
     {
         return $this->deviceId;
     }
 
+    /**
+     * @return array
+     */
     public function getSupportedInterfaces()
     {
         return $this->supportedInterfaces;
     }
 
+    /**
+     * @return IntentRequest|LaunchRequest|SessionEndedRequest|object
+     * @throws RequestException
+     */
     public function getRequestObject()
     {
         switch($this->requestType){
