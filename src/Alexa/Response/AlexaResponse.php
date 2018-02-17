@@ -112,7 +112,7 @@ class AlexaResponse
             $fieldName = 'text';
         }
 
-        $this->response['response']['reprompt'] = [
+        $this->response['response']['reprompt']['outputSpeech'] = [
             'type' => $type,
             $fieldName => (string) $text,
         ];
@@ -161,7 +161,7 @@ class AlexaResponse
             return $this->response;
         }
 
-        return json_decode($this->response);
+        return json_encode($this->response);
 
     }
 }
